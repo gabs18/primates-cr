@@ -1,0 +1,63 @@
+---
+title: 'Tarea 3: Visualización de datos: Primates en Costa Rica'
+subtitle: 'Curso: Procesamiento de datos geográficos (GF0604)'
+author: "Estudiante: Gabriela Becerra Sandoval (C01067)"
+date: "Fecha de entrega: 28/6/2021"
+output: 
+  html_document: 
+    fig_width: 15
+    fig_height: 10
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<br> 
+ 
+### Pasos preliminares
+Se cargan los paquetes de funciones, se crean las data.frame que se piensan emplear y se asigna el sistema de coordenadas.
+
+```{r initiate, message=FALSE}
+# Carga de paquetes
+
+library(dplyr)
+library(sf)
+library(DT)
+library(plotly)
+library(leaflet)
+```
+
+<br>
+
+```{r, message=FALSE, warning=FALSE}
+# Registros de presencia de Junco vulcani
+primates <-
+  st_read(
+    "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2021i-datos/main/gbif/primates-cr-registros.csv",
+    options = c(
+      "X_POSSIBLE_NAMES=decimalLongitude",
+      "Y_POSSIBLE_NAMES=decimalLatitude"
+    ),
+    quiet = TRUE
+  )
+
+# Asignación de CRS
+st_crs(primates) = 4326
+
+# Capa geespacial de cantones
+cantones <-
+  st_read(
+    "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2021i-datos/main/ign/delimitacion-territorial-administrativa/cr_cantones_simp_wgs84.geojson",
+    quiet = TRUE
+  )
+```
+
+<br>
+
+```{r}
+# Cruce espacial con la tabla de cantones, para obtener el nombre del cantón
+primates <- 
+  primates %>%
+  st_join(cantones["canton"])
+```
+
