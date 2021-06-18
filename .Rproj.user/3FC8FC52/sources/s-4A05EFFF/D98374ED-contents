@@ -12,6 +12,38 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+```{html}
+var = idioma_esp {
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sSearch":         "Buscar:",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+        "copy": "Copiar",
+        "colvis": "Visibilidad"
+    }
+}
+
+```
+
+
 <br> 
  
 ### Pasos preliminares
@@ -59,5 +91,16 @@ cantones <-
 primates <- 
   primates %>%
   st_join(cantones["canton"])
+```
+
+```{r}
+# Tabla de registros de presencia
+primates %>%
+  st_drop_geometry() %>%
+  select(stateProvince, canton, locality, eventDate) %>%
+  datatable(
+    colnames = c("Provincia", "Cantón", "Localidad", "Fecha"),
+    options = list(searchHighlight = TRUE, language = 'idioma_esp')
+  )
 ```
 
