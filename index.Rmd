@@ -5,8 +5,8 @@ author: "Estudiante: Gabriela Becerra Sandoval (C01067)"
 date: "Fecha de entrega: 28/6/2021"
 output: 
   html_document: 
-    fig_width: 15
-    fig_height: 10
+    fig_width: 10
+    fig_height: 8
 ---
 <br> 
 
