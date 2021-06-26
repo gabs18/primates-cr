@@ -1,8 +1,0 @@
-"0","# Cruce espacial con la tabla de cantones, para obtener el nombre del cantón"
-"0","primates <- "
-"0","  primates %>%"
-"0","  st_join(cantones[""canton""])"
-"2","although coordinates are longitude/latitude, st_intersects assumes that they are planar
-"
-"2","although coordinates are longitude/latitude, st_intersects assumes that they are planar
-"
